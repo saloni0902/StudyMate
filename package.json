@@ -1,0 +1,22 @@
+{
+  "name": "studymate",
+  "version": "1.0.0",
+  "private": true,
+  "description": "StudyMate: AI study assistant (React + Express + FastAPI RAG with Gemini)",
+  "type": "module",
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "dev": "concurrently --kill-others-on-fail -n ai,api,web -c yellow,cyan,green \"npm:dev:ai\" \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:ai": "node scripts/py.mjs -m uvicorn app.main:app --port 8008 --reload --reload-dir app",
+    "dev:api": "npm --prefix backend run dev",
+    "dev:web": "npm --prefix frontend run dev",
+    "test": "npm run test:ai && npm run test:api",
+    "test:ai": "node scripts/py.mjs -m pytest -q -p no:warnings",
+    "test:api": "npm --prefix backend test",
+    "build": "npm --prefix frontend run build",
+    "docs": "node scripts/build-diagrams.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6"
+  }
+}

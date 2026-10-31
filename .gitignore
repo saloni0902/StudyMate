@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+backend/uploads/*
+!backend/uploads/.gitkeep
+ai-service/data/indexes/*
+!ai-service/data/indexes/.gitkeep
+ai-service/data/documents/
+.DS_Store
+backend/.data/
