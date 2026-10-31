@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+/*
+  "Deep forest" theme, from Happy Hues palette 10
+  (https://www.happyhues.co/palettes/10). Change the app's colours here only:
+  each token becomes Tailwind classes such as bg-brand, text-ink, border-line.
+  Shades marked "derived" are lighter/darker steps of the palette's own colours.
+  Every text/background pair used in the app is at least 4.5:1 contrast.
+*/
+@theme {
+  --color-brand: #004643; /* deep teal: sidebar, user messages, links */
+  --color-brand-dark: #00302e; /* derived: hover on teal */
+  --color-brand-soft: #abd1c6; /* soft teal: chips, sidebar text */
+  --color-brand-tint: #e4efeb; /* derived: selected rows, hover */
+
+  --color-cta: #f9bc60; /* amber: the main action on each page */
+  --color-cta-hover: #f3a73f; /* derived */
+
+  --color-ink: #001e1d; /* headings and text on amber/soft teal */
+  --color-body: #2e4442; /* derived: body text */
+  --color-muted: #56696a; /* derived: secondary text */
+
+  --color-canvas: #e8e4e6; /* page background */
+  --color-surface: #fffffe; /* cards and panels */
+  --color-line: #d5dcd9; /* derived: borders */
+  --color-line-strong: #bccac6; /* derived: input borders */
+
+  --color-danger: #e16162; /* coral: delete, errors */
+}
+
+/* Defaults live in the base layer so a class like text-white on an element still wins. */
+@layer base {
+  body {
+    @apply bg-canvas text-body antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply text-ink;
+  }
+}
+
+::selection {
+  @apply bg-cta text-ink;
+}
+
+/* One focus style for every text field and dropdown */
+input:not([type="file"]):focus,
+select:focus,
+textarea:focus {
+  @apply border-brand outline-2 outline-offset-0 outline-brand-soft;
+}
+
+/* Keyboard focus on buttons and links */
+button:focus-visible,
+a:focus-visible {
+  @apply outline-2 outline-offset-2 outline-brand;
+}
+
+/* Answers rendered from markdown */
+.markdown > * + * {
+  @apply mt-2;
+}
+.markdown ul {
+  @apply list-disc pl-5;
+}
+.markdown ol {
+  @apply list-decimal pl-5;
+}
+.markdown li + li {
+  @apply mt-1;
+}
+.markdown strong {
+  @apply font-semibold text-ink;
+}
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  @apply font-semibold;
+}
+.markdown code {
+  @apply rounded bg-brand-tint px-1 text-[0.85em];
+}
